@@ -1,0 +1,26 @@
+Condición de Inicio de Sesión:
+
+el sistema pedirá al usuario iniciar sesión con 
+un máximo de 3 intentos. Si el usuario y la contraseña coinciden con los valores 
+predefinidos, el sistema permitirá acceder a las opciones del ejercicio. De lo 
+contrario, tras 3 intentos fallidos, el sistema se cerrará.
+
+Usuario predefinido: admin
+Contraseña predefinida: 1234
+
+Ejercicio 1: Sistema de Ventas de una Tienda
+Planteamiento del Problema:
+Un sistema de ventas para una tienda de ropa necesita calcular el total a pagar de los 
+clientes. El cliente puede comprar varios productos, y se aplican descuentos según la 
+cantidad adquirida. Además, se debe agregar el IVA al total.
+Requisitos:
+1. El sistema debe capturar el número de productos y el precio de cada producto.
+2. Si el cliente compra más de 5 productos, se aplica un 10% de descuento.
+3. Se debe calcular el IVA (19%) sobre el total.
+4. Si el valor final supera $500,000, se aplica un 5% de descuento adicional.
+5. El sistema permitirá al cliente agregar productos hasta que indique que no 
+quiere más, usando un ciclo while.
+
+Condiciones adicionales:
+• Inicio de sesión antes de realizar el cálculo de ventas.
+• Calcular el total final después de cada iteración.

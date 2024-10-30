@@ -1,7 +1,8 @@
-/* Sistema de ventas para una tienda de ropa necesita calcular el total a pagar de los 
-clientes. El cliente puede comprar varios productos, y se aplican descuentos según la 
+/* Sistema de ventas para una tienda de ropa necesita calcular el total a pagar de los
+clientes. El cliente puede comprar varios productos, y se aplican descuentos según la
 cantidad adquirida. Además, se debe agregar el IVA al total.
 */
+
 
 //arreglo con los datos del usuario y contraseña
 let usuarios = [
@@ -11,6 +12,7 @@ let usuarios = [
     }
 ];
 
+
 //logica de inicio de sesion de maximo 3 intentos
 let contador = 0;
 while (contador < 3) {
@@ -19,13 +21,21 @@ while (contador < 3) {
     if (user === usuarios[0].usuario && password === usuarios[0].password) {
         console.log("Bienvenido!");
 
+
         // 1. El sistema debe capturar el número de productos y el precio de cada producto.
 
+
         let precioBruto = 0;
+        let descuentoAdicional = 0;
+        let total;
+        let iva;
+        let descuento = 0;
+        let totalFinal;
         let productos = [];
         let numeroProductos = parseInt(
             prompt("Indique el numero de productos que se van a vender: ")
         );
+
 
         // Validar que el numero de productos ingresados sea un número válido
         while (isNaN(numeroProductos) || numeroProductos <= 0) {
@@ -52,13 +62,42 @@ while (contador < 3) {
                 );
             }
             precioBruto = precioBruto + precioProducto;
+            // 2. Si el cliente compra más de 5 productos, se aplica un 10% de descuento.
 
-            productos[i] = { nombre: 'item ' + (i + 1), precio: precioProducto};
+                if (numeroProductos > 5) {
+                    descuento = precioBruto * (10 / 100);
+                }
+                //console.log(descuento);
+
+
+                // 3. Se debe calcular el IVA (19%) sobre el total.
+
+
+                iva = (precioBruto - descuento) * 0.19;
+                total = precioBruto - descuento + iva;
+                //console.log(iva);
+                //console.log(total);
+
+
+                // 4. Si el valor final supera $500,000, se aplica un 5% de descuento adicional.
+
+                if (total > 500000) {
+                    descuentoAdicional = total * 0.05;
+                }
+                totalFinal = total - descuentoAdicional;
+
+
+                //console.log(descuentoAdicional);
+                //console.log(total);
+                //console.log(totalFinal);
+
+            //Calcular el total final después de cada iteración.
+            productos[i] = { nombre: 'item ' + (i + 1), precio: precioProducto, totalFinal:totalFinal};
         }
         //console.log(precioBruto);
         //console.log(productos);
-            
         // 5. El sistema permitirá al cliente agregar productos hasta que indique que no quiere más, usando un ciclo while.
+
 
         let adicionarProducto = parseInt(
             prompt("¿Desea agregar otro producto? 1.Sí 2.No ")
@@ -86,7 +125,44 @@ while (contador < 3) {
             }
             numeroProductos++;
             precioBruto += precioIngresado;
-            productos[numeroProductos-1] = { nombre: 'item ' + (numeroProductos), precio: precioIngresado};
+
+
+            // 2. Si el cliente compra más de 5 productos, se aplica un 10% de descuento.
+            
+            if (numeroProductos > 5) {
+                descuento = precioBruto * (10 / 100);
+            }else{
+                descuento = 0;
+            }
+            //console.log(descuento);
+
+
+            // 3. Se debe calcular el IVA (19%) sobre el total.
+            iva = (precioBruto - descuento) * 0.19;
+            total = precioBruto - descuento + iva;
+            //console.log(iva);
+            //console.log(total);
+
+
+            // 4. Si el valor final supera $500,000, se aplica un 5% de descuento adicional.
+
+
+            descuentoAdicional;
+            if (total > 500000) {
+                descuentoAdicional = total * 0.05;
+            } else{
+                descuentoAdicional = 0;
+            }
+            totalFinal = total - descuentoAdicional;
+
+
+                //console.log(descuentoAdicional);
+                //console.log(total);
+                //console.log(totalFinal);
+            
+            //Calcular el total final después de cada iteración.
+            productos[numeroProductos-1] = { nombre: 'item ' + (numeroProductos), precio: precioIngresado, totalFinal:totalFinal};
+
 
             // Se vuele a preguntar si se desea ingresar un nuevo producto
             adicionarProducto = parseInt(
@@ -103,64 +179,39 @@ while (contador < 3) {
         }
         //console.log(numeroProductos);
         //console.log(precioBruto);
-        //console.log(productos);
-
-        // 2. Si el cliente compra más de 5 productos, se aplica un 10% de descuento.
-
-        let descuento = 0;
-        if (numeroProductos > 5) {
-            descuento = precioBruto * (10 / 100);
-        }
-        //console.log(descuento);
-
-        // 3. Se debe calcular el IVA (19%) sobre el total.
-
-        let total;
-        let iva;
-        iva = (precioBruto - descuento) * 0.19;
-        total = precioBruto - descuento + iva;
-        //console.log(iva);
-        //console.log(total);
-
-        // 4. Si el valor final supera $500,000, se aplica un 5% de descuento adicional.
-
-        let descuentoAdicional = 0;
-        if (total > 500000) {
-            descuentoAdicional = total * 0.05;
-        }
-        let totalFinal = total - descuentoAdicional;
-
-        //console.log(descuentoAdicional);
-        //console.log(total);
-        //console.log(totalFinal);
+        //Para mostrar acumulado de totalFinal por cada iteracion
+        console.log(productos);
+        //
+        console.log("===========================================");
+        console.log('ACUMULADO DE TOTAL FINAL POR CADA ITERACION')
+        console.log("===========================================");
+        console.log("Productos:");
+        console.log("items - precio - total Final acumulado")
+        productos.forEach((producto, index) => {
+            console.log(`${index + 1}. ${producto.nombre} - $${producto.precio.toFixed(2)} - $${producto.totalFinal.toFixed(2)}`);
+        });
+        console.log("===========================================");
         
-        //Calcular el total final después de cada iteración.
-            
-        //Recibo y resultados por consola
-
-        function recibo(productos, subtotal, descuento, descuentoAdicional, total, iva, totalFinal) {
-            console.log("===================================");
-            console.log("           RECIBO DE VENTA          ");
-            console.log("===================================");
-            console.log("Productos:");
-            productos.forEach((producto, index) => {
-                console.log(`${index + 1}. ${producto.nombre} - $${producto.precio.toFixed(2)}`);
-            });
-            console.log("-----------------------------------");
-            console.log(`Subtotal: $${subtotal.toFixed(2)}`);
-            console.log(`Descuento: -$${descuento.toFixed(2)}`);
-            console.log(`IVA (19%): $${iva.toFixed(2)}`);
-            console.log(`Total: $${total.toFixed(2)}`);
-            console.log("-----------------------------------");
-            console.log(`Descuento adicional: -$${descuentoAdicional.toFixed(2)}`);
-            console.log("-----------------------------------");
-            console.log(`Total Final a pagar: $${totalFinal.toFixed(2)}`);
-            console.log("===================================");
-            console.log("       ¡Gracias por su compra!      ");
-            console.log("===================================");
-        }
-
-        recibo(productos, precioBruto, descuento, descuentoAdicional, total, iva, totalFinal);
+        //para mostrar el recibo final de la venta y otros detalles
+        console.log("\n ===================================");
+        console.log("           RECIBO DE VENTA          ");
+        console.log("===================================");
+        console.log("Productos:");
+        productos.forEach((producto, index) => {
+            console.log(`${index + 1}. ${producto.nombre} - $${producto.precio.toFixed(2)}`);
+        });
+        console.log("-----------------------------------");
+        console.log(`Valor bruto: $${precioBruto.toFixed(2)}`);
+        console.log(`Descuento: -$${descuento.toFixed(2)}`);
+        console.log(`IVA (19%): $${iva.toFixed(2)}`);
+        console.log(`Total: $${total.toFixed(2)}`);
+        console.log("-----------------------------------");
+        console.log(`Descuento adicional: -$${descuentoAdicional.toFixed(2)}`);
+        console.log("-----------------------------------");
+        console.log(`Total Final a pagar: $${totalFinal.toFixed(2)}`);
+        console.log("===================================");
+        console.log("       ¡Gracias por su compra!      ");
+        console.log("===================================");
 
 
         break;

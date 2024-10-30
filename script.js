@@ -83,8 +83,12 @@ while (contador < 3) {
         if (numeroProductos>5){
             descuento= numeroProductos*(10/100);
         }
-        console.log(descuento)
+        console.log(descuento);
         // 3. Se debe calcular el IVA (19%) sobre el total.
+        let total;
+        let iva;
+        iva= (precioBruto - descuento)* 0.19
+        total=precioBruto - descuento + iva;
 
         // 4. Si el valor final supera $500,000, se aplica un 5% de descuento adicional.
 

@@ -79,7 +79,13 @@ while (contador < 3) {
                 
 
         // 2. Si el cliente compra más de 5 productos, se aplica un 10% de descuento.
+        let descuento=0;
+        if (numeroProductos>5){
+            descuento= numeroProductos*(10/100);
+        }
+        console.log(descuento)
         // 3. Se debe calcular el IVA (19%) sobre el total.
+
         // 4. Si el valor final supera $500,000, se aplica un 5% de descuento adicional.
 
 

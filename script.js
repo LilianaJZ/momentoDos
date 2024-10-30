@@ -21,17 +21,24 @@ while (contador < 3) {
 
         // 1. El sistema debe capturar el número de productos y el precio de cada producto.
 
-        let numeroProductos = parseInt(prompt('Indique el numero de productos diferentes que se van a comprar: '));
         let precioBruto = 0;
+        let numeroProductos = parseInt(prompt('Indique el numero de productos que se van a vender: '));
+
+         // Validar que el numero de productos ingresados sea un número válido
+            while (isNaN(numeroProductos) || numeroProductos <= 0) {
+            // Volver a pedir el numero de productos
+            numeroProductos = parseInt(prompt('Respuesta inválida. Por favor, ingrese un numero de productos válido.'))
+            }
+
 
         console.log(numeroProductos)
         for (let i = 0; i < numeroProductos; i++) {
             let precioProducto = parseFloat(prompt('Ingrese el precio del producto #' + (i + 1)))
             
             // Validar que el precio ingresado sea un número válido
-            if (isNaN(precioProducto) || precioProducto <= 0) {
-                console.log('Por favor, ingrese un precio válido.');
-                continue; // Volver a pedir el precio
+            while (isNaN(precioProducto) || precioProducto <= 0) {     
+            // Volver a pedir el precio
+            precioProducto = parseFloat(prompt('Respuesta inválida. Por favor, ingrese un precio válido. \n Ingrese el precio del producto #' + (i + 1)))
             }
             precioBruto = precioBruto + precioProducto
         }
@@ -42,21 +49,22 @@ while (contador < 3) {
         let adicionarProducto = parseInt(prompt('¿Desea agregar otro producto? 1.Sí 2.No '))
             // Validar que la respuesta sea 1 o 2
             while (adicionarProducto !== 1 && adicionarProducto !== 2) {
+                // Volver a pregutar si se desea agregar producto
                 adicionarProducto = parseInt(prompt('Respuesta inválida. Digite nuevamente su respuesta \n ¿Desea agregar otro producto? 1.Sí 2.No '));
-                continue; // Volver a pregutar si se desea agregar producto
             }
             //Ciclo while para agregar productos hasta que se indique lo contrario
                 while (adicionarProducto === 1) {
                     let precioIngresado = parseFloat(prompt('Ingrese el precio del producto:'));
                     
                     // Validar que el precio ingresado sea un número válido
-                    if (isNaN(precioIngresado) || precioIngresado <= 0) {
-                        console.log('Por favor, ingrese un precio válido.');
-                        continue; // Volver a pedir el precio
+                    while (isNaN(precioIngresado) || precioIngresado <= 0) {
+                             // Volver a pedir el precio
+                    precioIngresado = parseFloat(prompt('Respuesta inválida. Por favor, ingrese un precio válido.'))
                     }
-
                     numeroProductos ++;
                     precioBruto += precioIngresado;
+                    
+                    // Se vuele a preguntar si se desea ingresar un nuevo producto
                     adicionarProducto = parseInt(prompt('¿Desea agregar otro producto? 1.Sí 2.No '));
 
                     // Validar que la respuesta sea 1 o 2
@@ -73,8 +81,6 @@ while (contador < 3) {
         // 2. Si el cliente compra más de 5 productos, se aplica un 10% de descuento.
         // 3. Se debe calcular el IVA (19%) sobre el total.
         // 4. Si el valor final supera $500,000, se aplica un 5% de descuento adicional.
-        // 5. El sistema permitirá al cliente agregar productos hasta que indique que no 
-        // quiere más, usando un ciclo while.
 
 
         break;

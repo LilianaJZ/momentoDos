@@ -92,7 +92,7 @@ while (contador < 3) {
                 //console.log(totalFinal);
 
             //Calcular el total final después de cada iteración.
-            productos[i] = { nombre: 'item ' + (i + 1), precio: precioProducto, totalFinal:totalFinal};
+            productos[i] = { nombre: 'item ' + (i + 1), precio: precioProducto,totalFinal:totalFinal};
         }
         //console.log(precioBruto);
         //console.log(productos);
@@ -161,7 +161,7 @@ while (contador < 3) {
                 //console.log(totalFinal);
             
             //Calcular el total final después de cada iteración.
-            productos[numeroProductos-1] = { nombre: 'item ' + (numeroProductos), precio: precioIngresado, totalFinal:totalFinal};
+            productos[numeroProductos-1] = { nombre: 'item ' + (numeroProductos), precio: precioIngresado,totalFinal:totalFinal};
 
 
             // Se vuele a preguntar si se desea ingresar un nuevo producto
@@ -182,37 +182,10 @@ while (contador < 3) {
         //Para mostrar acumulado de totalFinal por cada iteracion
         console.log(productos);
         //
-        console.log("===========================================");
-        console.log('ACUMULADO DE TOTAL FINAL POR CADA ITERACION')
-        console.log("===========================================");
-        console.log("Productos:");
-        console.log("items - precio - total Final acumulado")
-        productos.forEach((producto, index) => {
-            console.log(`${index + 1}. ${producto.nombre} - $${producto.precio.toFixed(2)} - $${producto.totalFinal.toFixed(2)}`);
-        });
-        console.log("===========================================");
+        iteracion(productos);
         
         //para mostrar el recibo final de la venta y otros detalles
-        console.log("\n ===================================");
-        console.log("           RECIBO DE VENTA          ");
-        console.log("===================================");
-        console.log("Productos:");
-        productos.forEach((producto, index) => {
-            console.log(`${index + 1}. ${producto.nombre} - $${producto.precio.toFixed(2)}`);
-        });
-        console.log("-----------------------------------");
-        console.log(`Valor bruto: $${precioBruto.toFixed(2)}`);
-        console.log(`Descuento: -$${descuento.toFixed(2)}`);
-        console.log(`IVA (19%): $${iva.toFixed(2)}`);
-        console.log(`Total: $${total.toFixed(2)}`);
-        console.log("-----------------------------------");
-        console.log(`Descuento adicional: -$${descuentoAdicional.toFixed(2)}`);
-        console.log("-----------------------------------");
-        console.log(`Total Final a pagar: $${totalFinal.toFixed(2)}`);
-        console.log("===================================");
-        console.log("       ¡Gracias por su compra!      ");
-        console.log("===================================");
-
+        recibo( productos,precioBruto,descuento,iva,total,descuentoAdicional,totalFinal);
 
         break;
     } else {
@@ -221,4 +194,38 @@ while (contador < 3) {
     if (contador === 3) {
         console.log("Lo sentimos, ha excedido el número de intentos 😣");
     }
+}
+
+function recibo( productos,precioBruto,descuento,iva,total,descuentoAdicional,totalFinal){
+    console.log("\n ===================================");
+    console.log("           RECIBO DE VENTA          ");
+    console.log("===================================");
+    console.log("Productos:");
+    productos.forEach((producto, index) => {
+        console.log(`${index + 1}. ${producto.nombre} - $${producto.precio.toFixed(2)}`);
+    });
+    console.log("-----------------------------------");
+    console.log(`Valor bruto: $${precioBruto.toFixed(2)}`);
+    console.log(`Descuento (10%): -$${descuento.toFixed(2)}`);
+    console.log(`IVA (19%): $${iva.toFixed(2)}`);
+    console.log(`Total: $${total.toFixed(2)}`);
+    console.log("-----------------------------------");
+    console.log(`Descuento adicional (5%): -$${descuentoAdicional.toFixed(2)}`);
+    console.log("-----------------------------------");
+    console.log(`Total Final a pagar: $${totalFinal.toFixed(2)}`);
+    console.log("===================================");
+    console.log("       ¡Gracias por su compra!      ");
+    console.log("===================================");
+}
+
+function iteracion(productos){
+    console.log("===========================================");
+        console.log('ACUMULADO DE TOTAL FINAL POR CADA ITERACION')
+        console.log("===========================================");
+        console.log("Productos:");
+        console.log("items - precio - total Final acumulado")
+        productos.forEach((producto, index) => {
+            console.log(`${index + 1}. ${producto.nombre} - $${producto.precio.toFixed(2)} - $${producto.totalFinal.toFixed(2)}`);
+        });
+        console.log("===========================================");
 }
